@@ -9,6 +9,12 @@ cors:
   allowed-headers: "*"
   exposed-headers: "*"
 
+aws:
+  region: ap-southeast-1
+  s3:
+    buckets:
+      customer: fs-allenchan-customer-test
+
 management:
   endpoints:
     web:

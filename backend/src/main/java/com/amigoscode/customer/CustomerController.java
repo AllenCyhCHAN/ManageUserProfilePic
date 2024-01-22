@@ -2,8 +2,10 @@ package com.amigoscode.customer;
 
 import com.amigoscode.jwt.JWTUtil;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -53,5 +55,23 @@ public class CustomerController {
             @RequestBody CustomerUpdateRequest updateRequest) {
         customerService.updateCustomer(customerId, updateRequest);
     }
+    
+    @PostMapping(
+            value = "{customerId}/profile-image",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadCustomerProfilePicture(
+            @PathVariable("customerId") Integer customerId,
+            @RequestParam("file") MultipartFile file){
+        customerService.uploadCustomerImage(customerId, file)
+    }
+
+    @GetMapping(
+            value = "{customerId}/profile-image")
+    public byte[] getCustomerProfilePicture(
+            @PathVariable("customerId") Integer customerId){
+        customerService.getCustomerProfileImage(customerId);
+    }
+
+
 
 }
